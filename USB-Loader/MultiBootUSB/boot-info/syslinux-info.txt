@@ -1,0 +1,42 @@
+﻿
+LABEL Debian netinstall 32 bit
+	MENU LABEL Debian netinstall 32 bit
+	KERNEL vmlinuz-debian32
+	initrd initrd-debian32.gz
+
+LABEL Debian netinstall 64 bit
+	MENU LABEL Debian netinstall 64 bit
+	KERNEL vmlinuz-debian64
+	initrd initrd-debian64.gz
+
+LABEL Fedora netinstall
+	MENU LABEL Fedora netinstall
+	KERNEL vmlinuz-fedora
+
+LABEL Grub 4 Dos
+	MENU LABEL 0) Grub 4 DOS
+	KERNEL grub.exe
+
+# Firstly, Windows does not found files in /I386 folder because it searches in the root / of the stick.
+# Copying them to the root can make another troubles.
+#LABEL winxp
+#	MENU LABEL Boot Windows 2000/XP/2003 (SETUPLDR.BIN) from CD/DVD
+#	COM32 chain.c32
+#	APPEND ntldr=/I386/SETUPLDR.BIN
+#LABEL win7
+#	MENU LABEL Boot Windows Vista/2008/7 (bootmgr) from CD/DVD
+#	COM32 chain.c32
+#	APPEND ntldr=/bootmgr
+
+# Solution: boot DOS >7.0 (6.0 does not see FAT32) and install under DOS.
+LABEL 4dos
+	MENU LABEL 4DOS MS-DOS 7.1 RUS
+	kernel memdisk
+	append initrd=/bootdisk/4dos.ima floppy
+
+# Download if you need 6.22 version of DOS
+LABEL dos622
+	MENU LABEL DOS 6.22
+	kernel memdisk
+	append initrd=/bootdisk/dos622.img floppy
+

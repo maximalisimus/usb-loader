@@ -1,0 +1,76 @@
+﻿
+Boot from next drive (INT18h)
+\ERDC\NEXTDRV.BIN
+
+Start bootmanager Plop
+\ERDC\PLOP.BIN
+
+Start DOS-utilites HD DaRTs
+\ERDC\HDDARTS.BIN
+
+ERD Commander 5.0 x86 (for Windows 2003/XP)
+\ERDC\GRLDR
+
+ERD Commander 6.0 x86 (for Windows Vista)
+\ERDC\ERD6X86.WIM
+\ERDC\boot.sdi
+\Windows\system32\boot\winload.exe
+\windows\system32\boot\winload.efi
+\Windows
+ru-RU
+
+ERD Commander 6.0 x64 (for Windows Vista)
+\ERDC\ERD6X64.WIM
+\ERDC\boot.sdi
+\Windows\system32\boot\winload.exe
+\windows\system32\boot\winload.efi
+\Windows
+ru-RU
+
+MS-DaRT 7.0 x86 (for Windows 7)
+\ERDC\ERD7X86.WIM
+\ERDC\boot.sdi
+\Windows\system32\boot\winload.exe
+\windows\system32\boot\winload.efi
+\Windows
+ru-RU
+
+MS-DaRT 7.0 x64 (for Windows 7)
+\ERDC\ERD7X64.WIM
+\ERDC\boot.sdi
+\Windows\system32\boot\winload.exe
+\windows\system32\boot\winload.efi
+\Windows
+ru-RU
+
+MS-DaRT 8.0 x86 (for Windows 8)
+\ERDC\ERD8X86.WIM
+\ERDC\boot.sdi
+\Windows\system32\boot\winload.exe
+\windows\system32\boot\winload.efi
+\Windows
+ru-RU
+
+MS-DaRT 8.0 x64 (for Windows 8)
+\ERDC\ERD8X64.WIM
+\ERDC\boot.sdi
+\Windows\system32\boot\winload.exe
+\windows\system32\boot\winload.efi
+\Windows
+ru-RU
+
+Restart
+\boot\RESTART.BIN
+
+
+
+
+
+
+
+
+
+
+
+
+

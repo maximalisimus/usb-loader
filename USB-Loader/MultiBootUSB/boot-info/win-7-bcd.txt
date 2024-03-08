@@ -1,0 +1,40 @@
+﻿
+BIOS
+
+Windows 7 SP1 32-bit Setup
+
+Boot WIM
+\sources\boot.wim
+\boot\boot.sdi
+\windows\system32\boot\winload.exe
+\windows
+en-US
+
+Normal mode
+Hal Kernel
+WinPE
+
+
+Windows 7 SP1 64-bit Setup
+
+\sources\boot64.wim
+\boot\boot.sdi
+\windows\system32\boot\winload.exe
+\windows
+
+
+UEFI
+
+Windows Setup
+
+\sources\boot64.wim
+\boot\boot.sdi
+
+\windows\system32\boot\winload.efi
+\windows
+
+
+
+
+
+

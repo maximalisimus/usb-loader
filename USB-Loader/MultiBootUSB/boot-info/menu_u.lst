@@ -1,0 +1,137 @@
+﻿timeout 30
+gfxmenu /boot/Rainbow
+default 0
+
+title <<< Back to Main Menu" 
+configfile /menu.lst
+
+title Win 98
+find --set-root /IMG/win98.ima
+map /IMG/win98.ima (0xff) || map --mem /IMG/win98.ima (0xff)
+map --hook
+chainloader (0xff)
+
+title XP Inst
+find --set-root /IMG/xp_inst.gz
+map /IMG/xp_inst.gz (0xff) || map --mem /IMG/xp_inst.gz (0xff)
+map --hook
+chainloader (0xff)
+
+title Kon-Boot V2.1
+map --mem /boot/konboot.img (fd0)
+map --hook
+chainloader (fd0)+1
+map (hd1) (hd0)
+map --hook
+rootnoverify (fd0)
+
+title Kon-Boot V2.1 ISO
+find --set-root /boot/kon-bootCD.iso
+map --mem /boot/kon-bootCD.iso (hd32)
+map --hook
+chainloader (hd32)
+
+title Kon-Boot v2.1 Old
+map --mem /boot/konbootOLD.img (fd0)
+map --hook
+chainloader (fd0)+1
+map (hd1) (hd0)
+map --hook
+rootnoverify (fd0)
+
+title Kon-Boot v2.1 ISO Old
+find --set-root /boot/kon-bootCD_old.iso
+map --mem /boot/kon-bootCD_old.iso (hd32)
+map --hook
+chainloader (hd32)
+
+title abrsw
+find --set-root /IMG/atiesdds.iso
+map /IMG/atiesdds.iso (0xff) || map --mem /IMG/atiesdds.iso (0xff)
+map --hook
+chainloader (0xff)
+
+title abrsw
+find --set-root /IMG/abrsw.iso
+map /IMG/abrsw.iso (0xff) || map --mem /IMG/abrsw.iso (0xff)
+map --hook
+chainloader (0xff)
+
+title FreeDOS - DOS-Navigator and VC  
+find --set-root /boot/FreeDOS.IMA
+map --mem /boot/FreeDOS.IMA (fd0) 
+map --hook
+rootnoverify (fd0)
+chainloader (fd0)+1
+
+title Universal System Disk v3.7- NTFS witch DOS
+find --set-root /boot/UniversalDisk.IMA
+map --mem /boot/UniversalDisk.IMA (fd0) 
+map --hook
+rootnoverify (fd0)
+chainloader (fd0)+1
+
+title NT Password & Registry Editor
+find --set-root /boot/NtPasRec.IMA 
+map --mem /boot/NtPasRec.IMA (fd0) 
+map --hook
+rootnoverify (fd0)
+chainloader (fd0)+1
+
+title Active Boot Disk Professional v2.1
+find --set-root /boot/ActiveCD.WBT
+map --mem /boot/ActiveCD.WBT (fd0) 
+map --hook
+rootnoverify (fd0)
+chainloader (fd0)+1
+
+title QuickTech Pro v5.8 
+find --set-root /grldr 
+kernel /boot/memdisk 
+initrd /boot/Qtpro580.IMG
+
+title MemTest86+ v4.20
+find --set-root /boot/MemTest.IMG
+map --mem /boot/MemTest.IMG (fd0) 
+map --hook
+rootnoverify (fd0)
+chainloader (fd0)+1
+
+title MHDD v4.6
+find --set-root /boot/MHDD.IMA
+map --mem /boot/MHDD.IMA (fd0) 
+map --hook
+rootnoverify (fd0)
+chainloader (fd0)+1
+
+title Victoria v3.52
+find --set-root /boot/Victoria.IMA
+map --mem /boot/Victoria.IMA (fd0) 
+map --hook
+rootnoverify (fd0)
+chainloader (fd0)+1
+
+title HDD Regenerator v2011
+find --set-root /boot/HDDReg.IMG
+map --mem /boot/HDDReg.IMG (fd0) 
+map --hook
+rootnoverify (fd0)
+chainloader (fd0)+1
+
+title
+root
+
+title CMD
+commandline
+
+title CD/DVD-ROM
+cdrom --init
+map --hook
+chainloader (cd0)
+
+title Restart PC
+reboot
+
+title Shutdown PC
+halt
+

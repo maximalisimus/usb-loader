@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 7.6.2.1 (Linux)"/>
+	<meta name="author" content="уил смит"/>
+	<meta name="created" content="2014-10-10T07:37:00"/>
+	<meta name="changedby" content="уил смит"/>
+	<meta name="changed" content="2014-10-10T07:49:00"/>
+	<meta name="AppVersion" content="12.0000"/>
+	<style type="text/css">
+		@page { size: 21cm 29.7cm; margin-left: 3cm; margin-right: 1.5cm; margin-top: 2cm; margin-bottom: 2cm }
+		p { line-height: 115%; text-align: left; orphans: 2; widows: 2; margin-bottom: 0.25cm; direction: ltr; background: transparent }
+		a:link { color: #0000ff; text-decoration: underline }
+	</style>
+</head>
+<body lang="ru-RU" link="#0000ff" vlink="#800000" dir="ltr"><p style="margin-bottom: 0.35cm">
+Программы: <span lang="en-US">PUH Edition </span>и
+Конструктор <span lang="en-US">USB</span></p>
+<p style="margin-bottom: 0.35cm">сайт</p>
+<p style="margin-bottom: 0.35cm"><font color="#0000ff"><u><a href="http://lazvm-comp.ru/publ/sozdanie_multizagruzochnoj_usb_fleshki_na_osnove_zagruzchika_grub4dos/1-1-0-38">http://lazvm-comp.ru/publ/sozdanie_multizagruzochnoj_usb_fleshki_na_osnove_zagruzchika_grub4dos/1-1-0-38</a></u></font></p>
+<p style="margin-bottom: 0.35cm"><br/>
+<br/>
+
+</p>
+<p style="margin-bottom: 0.35cm"><font color="#a70003"><font face="Arial, serif"><font size="2" style="font-size: 10pt"><b>Создание
+мультизагрузочной USB-флешки на основе
+загрузчика grub4dos</b></font></font></font></p>
+<table width="100%" cellpadding="2" cellspacing="0">
+	<col width="256*"/>
+	<tr>
+		<td width="100%" style="border-top: 1px solid #c8c6cb; border-bottom: none; border-left: none; border-right: none; padding-top: 0.13cm; padding-bottom: 0cm; padding-left: 0cm; padding-right: 0cm"><p align="center" style="margin-bottom: 0.35cm">
+			<a href="http://lazvm-comp.ucoz.ru/_pu/0/86400998.jpg">
+  <img src="grub4dos_manual_html_610627b45442da67.jpg" name="Рисунок 1" align="bottom" width="400" height="312" border="0"/>
+</a>
+</p>
+			<p align="justify" style="margin-bottom: 0.35cm"><font color="#000000"><font face="Verdana, serif"><font size="1" style="font-size: 8pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Grub4dos
+			- это универсальный загрузчик, который
+			может быть установлен на USB-флешку и
+			позволяющий загружать различные
+			операционные системы. Кроме этого, с
+			помощью него можно сделать не просто
+			загрузочный носитель, а мультизагрузочный,
+			то есть на одной флешке может находится
+			установочные и live образы различных
+			операционных систем и программ (Windows
+			XP, Windows 7, Windows 8, Ubuntu, Knoppix, Memtest86+, Hirens
+			BootCD, SonyaPE и т.д.), количество которых
+			ограниченно лишь свободным пространством
+			флешки. Преимущества такой
+			мультизагрузочного носителя очевидны:</font></font></font></p>
+			<ul>
+				<li><p align="justify" style="margin-top: 0.49cm; margin-bottom: 0cm">
+				<font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">отпадает
+				необходимость иметь кучу CD и DVD дисков;</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">загрузка
+				и установка с USB происходит значительно
+				быстрее;</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">на
+				нетбуках это вообще единственный
+				способ установки ОС, так как у них
+				вовсе нету DVD-привода;</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0.49cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">возможность
+				легко добавлять/удалять необходимые
+				компоненты для загрузки;</font></font></font></p></li>
+			</ul>
+			<p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Проблемы
+			с загрузкой могут возникнуть только
+			лишь на архаичных машинах, где BIOS
+			материнской платы не позволяет
+			загружаться с USB, но во-первых, количество
+			таких компьютеров с каждым днём
+			стремится к нулю, а во-вторых, это
+			решается с помощью загрузочного
+			CD-диска с загрузчиком PLOP Boot Manager.<br/>
+<br/>
+Итак,
+			что нам понадобится?</font></font></font></p>
+			<ul>
+				<li><p align="justify" style="margin-top: 0.49cm; margin-bottom: 0cm">
+				<font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">USB-флешка
+				объёмом от 1 Гб (естественно при таком
+				объёме флешка получится скорее
+				монозагрузочной). Я использую 64 Гб.
+				Этого вполе хватает как для различных
+				загрузочных образов, так и для других
+				данных.</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0cm"><font color="#0000ff"><u><a href="https://yadi.sk/d/9o5O9P5RTH8ca"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">USB
+				Disk Storage Format Tool</font></font></font></a></u></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">-
+				бесплатная утилита с расширенными
+				возможностями по форматированию
+				USB-дисков/карт</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Непосредсвтенно
+				сам</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#0000ff"><u><a href="https://yadi.sk/d/dQYHiAFJTH8TR"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">GUI-установщик</font></font></font></a></u></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">загрузчика
+				Grub4Dos</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0.49cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Операционная
+				система Windows)). Вообще можно установить
+				Grub4Dos и из-под DOS или Linux</font></font></font></p></li>
+			</ul>
+			<p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Для
+			начала нужно отформатировать USB-флешку
+			в файловую систему NTFS. Обычно на флешках
+			&quot;по умолчанию&quot; применяется FAT32.
+			Даже если вы не собираетесь ипользовать
+			носитель в качестве загрузочного, то
+			неплохо бы использовать именно NTFS,
+			особенно если флешка имеет объём более
+			4 Гб, так как масимальный размер файла
+			в FAT32 составляет 4 Гб; а также NTFS имеет
+			множество преимуществ перед более
+			ранней системой FAT32:</font></font></font></p>
+			<ul>
+				<li><p align="justify" style="margin-top: 0.49cm; margin-bottom: 0cm">
+				<font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Способность
+				автоматически восстанавливаться
+				после некоторых ошибок диска (FAT32 не
+				обладает такой способностью).</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Улучшенная
+				поддержка больших жёстких дисков.</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0.49cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Более
+				высокая степень безопасности. Возможно
+				использование разрешений и шифрования
+				для запрета пользовательского доступа
+				к определенным файлам.</font></font></font></p></li>
+			</ul>
+			<p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Штатными
+			средствами Windows этого сделать не
+			представляется возможности, поэтому
+			используем USB Disk Storage Format Tool для
+			форматирования. Внимание! При
+			форматировании все данные, которые
+			находятся на носителе стираются. Не
+			забываем об этом и не теряем свои
+			файлы. В поле Device выбираем нужный
+			USB-носитель; File system - NTFS; Volume label - указываем
+			желаемую метку флешки или оставляем
+			поле пустым. По кнопке Start и ещё одного
+			подтверждения происходит форматирование
+			носителя.</font></font></font></p>
+			<p align="center" style="margin-bottom: 0.35cm"><img src="grub4dos_manual_html_bf4371ae4f471d29.jpg" name="Рисунок 2" align="bottom" width="338" height="430" border="0"/>
+<font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+<br/>
+</font></font></font><img src="grub4dos_manual_html_f4c5b4bd623e92d1.jpg" name="Рисунок 3" align="bottom" width="304" height="220" border="0"/>
+</p>
+			<p align="justify" style="margin-bottom: 0.35cm"><font color="#000000"><font face="Verdana, serif"><font size="1" style="font-size: 8pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Теперь
+			запускаем установщик Grub4DOS.exe, через
+			&quot;Обзор&quot; выбираем USB-флешку,
+			извлекаем файлы.</font></font></font></p>
+			<p align="center" style="margin-bottom: 0.35cm"><a href="http://lazvm-comp.ucoz.ru/_pu/0/63791143.jpg">
+  <img src="grub4dos_manual_html_ecafe0d623060c1e.jpg" name="Рисунок 4" align="bottom" width="400" height="297" border="0"/>
+</a>
+</p>
+			<p align="justify" style="margin-bottom: 0.35cm"><font color="#000000"><font face="Verdana, serif"><font size="1" style="font-size: 8pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Ставим
+			в поле Disc птичку и выбираем нашу флешку.
+			В списке будут также разделы вашего
+			жесткого диска, будьте внимательны,
+			ориентируйтесь на объём. В данном
+			случае тестовый USB-носитель имеет
+			объём 4 Гб (3812М). Остальные настройки
+			не трогаем и жмём Install.</font></font></font></p>
+			<p align="center" style="margin-bottom: 0.35cm"><a href="http://lazvm-comp.ucoz.ru/_pu/0/53051361.jpg">
+  <img src="grub4dos_manual_html_b6676b914242b8c6.jpg" name="Рисунок 5" align="bottom" width="317" height="499" border="0"/>
+</a>
+</p>
+			<p align="justify" style="margin-bottom: 0.35cm"><font color="#000000"><font face="Verdana, serif"><font size="1" style="font-size: 8pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">После
+			этого на USB появились необходимые
+			файлы и она стала загрузочной. Осталось
+			лишь подсунуть на носитель необходимые
+			файлы для загрузки нужных операционных
+			систем и программ.</font></font></font></p>
+			<p align="center" style="margin-bottom: 0.35cm"><a href="http://lazvm-comp.ucoz.ru/_pu/0/92327637.jpg">
+  <img src="grub4dos_manual_html_d627b06f444a0bfb.jpg" name="Рисунок 6" align="bottom" width="400" height="319" border="0"/>
+</a>
+</p>
+			<p align="justify" style="margin-bottom: 0.35cm"><font color="#000000"><font face="Verdana, serif"><font size="1" style="font-size: 8pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Что
+			за файлы перед нами? Menu.lst - наиглавнейший
+			конфигурационный файл, с которым
+			предстоит работать. Это по сути
+			текстовый файл, его можно открывать
+			с помощью обычного блокнота. grldr -
+			непосредственно загрузчик. В папке
+			Boot находится вложенная папка gfx, где
+			хранится тема оформления Grub4dos. Большую
+			коллекцию подходящих тем можно
+			взять</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#0000ff"><u><a href="http://greenflash.su/photo/4"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">здесь</font></font></font></a></u></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">.
+			Кладём тему в gfx и подправляем в Menu.lst
+			имя нашей новой темы оформления.
+			Разберём немножко структуру Menu.lst.
+			Строки начинающиеся с символа # - это
+			комментарии, которые никак не влияют
+			на конфигурацию загрузчика. Стоит
+			привести комментарии из Menu.lst<br/>
+<br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">#
+			Файл который вы сейчас читаете,
+			предназначен для настройки вида вашего
+			загрузочного меню</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+<br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">#
+			Здесь вы можете:</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">#
+			Указать время до загрузки пункта по
+			умолчанию - timeout=х, х - цифра, количество
+			секунд.</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">#
+			Команда - default 0 обозначает какая строчка
+			(пункт загрузки) будет отмечена курсором
+			по умолчанию.</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">#
+			Назначить gfx-boot тему (фоновое изображение)
+			командой - gfxmenu устройство/где/лежит/тема.gz</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">#
+			Заголовок каждого пункта загрузки
+			это команда - title</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+<br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">#
+			Вы можете менять этот файл под свои
+			нужды (по аналогии с тем, какой он
+			сейчас) как вам будет угодно.</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">#
+			Более подробно о загрузчике Grub4DOS и о
+			этом файле вы можете почитать
+			здесь:</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">#</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">&nbsp;</span></font></font></font><font color="#0000ff"><u><a href="http://greenflash.su/Grub4Dos/Grub4dos.htm"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">http://greenflash.su/Grub4Dos/Grub4dos.htm</span></font></font></font></a></u></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">#
+			Ну и конечно же мы всегда будем рады
+			видеть вас на</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">&nbsp;</span></font></font></font><font color="#0000ff"><u><a href="http://greenflash.su/"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">http://greenflash.su</span></font></font></font></a></u></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">&nbsp;</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">:-)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="1" style="font-size: 8pt"><br/>
+&nbsp;</font></font></font></p>
+			<p align="center" style="margin-bottom: 0.35cm"><a href="http://lazvm-comp.ucoz.ru/_pu/0/26433100.jpg">
+  <img src="grub4dos_manual_html_28d38036b3930ee6.jpg" name="Рисунок 7" align="bottom" width="400" height="299" border="0"/>
+</a>
+</p>
+			<p align="justify" style="margin-bottom: 0.35cm"><font color="#000000"><font face="Verdana, serif"><font size="1" style="font-size: 8pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Теперь
+			самое важное. Как добавлять загрузочные
+			образы? Вся прелесть Grub4dos в его
+			универсальности и всеядности. С помощью
+			него можно загрузить практически всё,
+			что угодно, в том числе обычные iso
+			образы, которые предварительно
+			распаковываются в оперативную память
+			и т.д. Но для этого нужно знать что и
+			как прописывать в конфигурационный
+			файл Menu.lst. Самое же простое это обратить
+			внимание на эти две раздачи с
+			Рутрекера:</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#0000ff"><u><a href="http://rutracker.org/forum/viewtopic.php?t=4273049"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">PUH
+			Edition v2</font></font></font></a></u></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">,</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#0000ff"><u><a href="http://rutracker.org/forum/viewtopic.php?t=3380538"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Конструктор
+			USB 1</font></font></font></a></u></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">.
+			Там собрано практически всё необходимое:
+			всевозможные версии операционных
+			систем семейства Windows, Linux и не только;
+			и, что наиболее важно, кроме самих
+			файлов в архивах есть необходимые
+			строчки, которые нужно прописать в
+			файл Menu.lst. Замечу, что можно скачивать
+			только необходимые файлы, а не всю
+			раздачу целиком.<br/>
+<br/>
+Для наглядности
+			давайте добавим на флешку Memtest86+ v4.10
+			из раздачи Конструктор USB. Запускаем
+			загруженный файл &quot;добавляем
+			Memtest86+ v4.10.exe&quot; и извлекаем файлы на
+			загрузочную флешку. Идём на USB и видим
+			одноименную папку &quot;добавляем
+			Memtest86+ v4.10.exe&quot;, в которой есть текстовый
+			файлик &quot;инструкция&quot;. Открываем
+			и читаем:<br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">1.
+			Копируем образ диска&nbsp; и архив на
+			вашу флешку .</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">2.
+			Открываем блокнотом файл Menu.lst и
+			добовляем туда такие строки:</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+<br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">title
+			Memtest86+ v4.10</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">kernel
+			(hd0,0)/memtest86+_v4.10.bin</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+<br/>
+Выполняем
+			это, загружаемся с носителя и видим
+			нужный пункт загрузки.&nbsp;</font></font></font></p>
+			<p align="center" style="margin-bottom: 0.35cm"><a href="http://lazvm-comp.ucoz.ru/_pu/0/16524461.jpg">
+  <img src="grub4dos_manual_html_62c6fc224796b744.jpg" name="Рисунок 8" align="bottom" width="399" height="363" border="0"/>
+</a>
+<font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+<br/>
+</font></font></font><a href="http://lazvm-comp.ucoz.ru/_pu/0/32741091.jpg">
+  <img src="grub4dos_manual_html_efa4870c802d8bc3.jpg" name="Рисунок 9" align="bottom" width="400" height="308" border="0"/>
+</a>
+</p>
+			<p align="justify" style="margin-bottom: 0.35cm"><font color="#000000"><font face="Verdana, serif"><font size="1" style="font-size: 8pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Мои
+			видеоуроки о том, как загружаться с
+			внешнего носителя смотрите</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#0000ff"><u><a href="http://lazvm-comp.ru/video/vip/2/videouroki/bios/nastrojka_ami_bios_dlja_zagruzki_s_cd_dvd_diska"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">тут</font></font></font></a></u></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">и</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#0000ff"><u><a href="http://lazvm-comp.ru/video/vip/3/videouroki/bios/nastrojka_award_bios_dlja_zagruzki_s_vneshnikh_nositelej"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">тут</font></font></font></a></u></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+<br/>
+Далее
+			хотелось бы рассказать немного
+			поподробней как &quot;руками&quot; добавить
+			те или иные компоненты:<br/>
+1. Добавляем
+			Windows XP</font></font></font></p>
+			<ul>
+				<li><p align="justify" style="margin-top: 0.49cm; margin-bottom: 0cm">
+				<font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Скачиваем</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#0000ff"><u><a href="https://cloud.mail.ru/public/74df42a67b24/Microsoft%20Windows%20XP%20Professional%20SP3%20Russian%20VL.zip"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Microsoft
+				Windows XP Professional SP3 Russian VL</font></font></font></a></u></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">и
+				извлекаем все файлы и папки из этого
+				архива в корень USB-носителя</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Прописываем
+				в Menu.lst следующие строчки</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0.49cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">title
+				Установка Microsoft Windows XP Professional SP3 Russian
+				VL</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">root
+				(hd0,0)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				--mem /WINSETUP/XPpSP32.ISO (0xff)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				(hd0) (hd1)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				(hd1) (hd0)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				--hook</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">root
+				(0xff)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">chainloader
+				/I386/SETUPLDR.BIN</span></font></font></font></p></li>
+			</ul>
+			<p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">2.
+			Добавляем Windows 7 х86 SP1 Russian MSDN update
+			13.05.2014. Это оригинальный образ от
+			Microsoft. Изменения минимальны: разблокирован
+			выбор редакций при установке;
+			интегрированы все обновления по
+			состоянию на 13 мая 2014 года; активация
+			не применялась.</font></font></font></p>
+			<ul>
+				<li><p align="justify" style="margin-top: 0.49cm; margin-bottom: 0cm">
+				<font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Скачиваем&nbsp;</font></font></font><font color="#0000ff"><u><a href="https://cloud.mail.ru/public/df6c9cc2446b/Windows%207%20%D1%8586%20SP1%20Russian%20MSDN%20update%2013.05.2014.zip"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Windows
+				7 х86 SP1 Russian MSDN update 13.05.2014</font></font></font></a></u></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">и
+				извлекаем все файлы и папки из этого
+				архива в корень USB-носителя</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Прописываем
+				в Menu.lst следующие строчки</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0.49cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">title
+				Установка Windows 7 х86 SP1 Russian MSDN update
+				13.05.2014</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				--unmap=0:0xff</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				--unhook</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">root
+				(hd0,0)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">chainloader
+				/bootmgr2</span></font></font></font></p></li>
+			</ul>
+			<p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">3.&nbsp;Добавляем&nbsp;Windows
+			7 х64 SP1 Russian MSDN update 13.05.2014. Это оригинальный
+			образ от Microsoft. Изменения минимальны:
+			разблокирован выбор редакций при
+			установке; интегрированы все обновления
+			по состоянию на 13 мая 2014 года; активация
+			не применялась.</font></font></font></p>
+			<ul>
+				<li><p align="justify" style="margin-top: 0.49cm; margin-bottom: 0cm">
+				<font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Скачиваем&nbsp;</font></font></font><font color="#0000ff"><u><a href="https://cloud.mail.ru/public/8d3355d955f5/Windows%207%20%D1%8564%20SP1%20Russian%20MSDN%20update%2013.05.2014.zip"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Windows
+				7 х64 SP1 Russian MSDN update 13.05.2014</font></font></font></a></u></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">и
+				извлекаем все файлы и папки из этого
+				архива в корень USB-носителя</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Прописываем
+				в Menu.lst следующие строчки</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0.49cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">title
+				Установка&nbsp;Windows 7 х64 SP1 Russian MSDN update
+				13.05.2014</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				--unmap=0:0xff</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				--unhook</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">root
+				(hd0,0)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">chainloader
+				/bootmgr1</span></font></font></font></p></li>
+			</ul>
+			<p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">4.
+			Добавляем Windows 8 x86_x64. На основе
+			оригинальных образов от Microsoft. Изменения
+			минимальны: разблокирован выбор
+			редакций при установке; обе разрядности
+			в одной упаковке; активация не
+			применялась.</font></font></font></p>
+			<ul>
+				<li><p align="justify" style="margin-top: 0.49cm; margin-bottom: 0cm">
+				<font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Скачиваем&nbsp;</font></font></font><font color="#0000ff"><u><a href="https://cloud.mail.ru/public/f52ad72697f2/Windows%208%20%28x86_x64%29.zip"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Windows
+				8 x86_x64</font></font></font></a></u></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">и
+				извлекаем все файлы и папки из этого
+				архива в корень USB-носителя</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Прописываем
+				в Menu.lst следующие строчки</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0.49cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">title
+				Установка Windows 8 (x86_x64)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">chainloader
+				/win7/bootwin8</span></font></font></font></p></li>
+			</ul>
+			<p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">5.
+			Добавляем Windows 8.1 update 1 Professional (x86).
+			Оригинальный образ. Активация не
+			применялась. Iso-образ, который в архиве
+			лежит в папке Boot должен быть на флешке
+			дефрагментирован. В противном случае
+			получите ошибку Error 60: File for drive emulation
+			must be in one contiguous disk area.</font></font></font></p>
+			<ul>
+				<li><p align="justify" style="margin-top: 0.49cm; margin-bottom: 0cm">
+				<font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Скачиваем</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#0000ff"><u><a href="https://cloud.mail.ru/public/bfc0fb4285e6/Windows%208.1%20update%201%20Professional%20%28x86%29.zip"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Windows
+				8.1 update 1 Professional (x86)</font></font></font></a></u></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">и
+				извлекаем все файлы и папки из этого
+				архива в корень USB-носителя</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Прописываем
+				в Menu.lst следующие строчки</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0.49cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">title
+				Установка Windows 8.1 update 1 Professional (x86)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">set
+				MYISO=WIN8x86.iso</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				--mem (md)0x800+4 (99)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				/Boot/%MYISO% (0xff)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">checkrange
+				0x80 read 0x8280 &amp;&amp; map (hd0) (hd1)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">checkrange
+				0x80 read 0x8280 &amp;&amp; map (hd1) (hd0)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				--hook</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">write
+				(99)
+				[FiraDisk]\nStartOptions=cdrom,vmem=find:/Boot/%MYISO%;\n\0</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">chainloader
+				(0xff)/BOOTMGR || chainloader (0xff)</span></font></font></font></p></li>
+			</ul>
+			<p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">6.
+			Добавляем Windows 8.1 update 1 Professional (x64).
+			Оригинальный образ. Активация не
+			применялась. Iso-образ, который в архиве
+			лежит в папке Boot должен быть на флешке
+			дефрагментирован. В противном случае
+			получите ошибку Error 60: File for drive emulation
+			must be in one contiguous disk area.</font></font></font></p>
+			<ul>
+				<li><p align="justify" style="margin-top: 0.49cm; margin-bottom: 0cm">
+				<font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Скачиваем</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#0000ff"><u><a href="https://cloud.mail.ru/public/ad4144bec214/Windows%208.1%20update%201%20Professional%20%28x64%29.zip"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Windows
+				8.1 update 1 Professional (x64)</font></font></font></a></u></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">и
+				извлекаем все файлы и папки из этого
+				архива в корень USB-носителя</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Прописываем
+				в Menu.lst следующие строчки</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0.49cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">title
+				Установка Windows 8.1 update 1 Professional (x64)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">set
+				MYISO=WIN8x64.iso</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				--mem (md)0x800+4 (99)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				/Boot/%MYISO% (0xff)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">checkrange
+				0x80 read 0x8280 &amp;&amp; map (hd0) (hd1)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">checkrange
+				0x80 read 0x8280 &amp;&amp; map (hd1) (hd0)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				--hook</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">write
+				(99)
+				[FiraDisk]\nStartOptions=cdrom,vmem=find:/Boot/%MYISO%;\n\0</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">chainloader
+				(0xff)/BOOTMGR || chainloader (0xff)</span></font></font></font></p></li>
+			</ul>
+			<p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">7.
+			Добавляем Windows 7/8/8.1. Таким способом
+			можно добавить только какой-либо один
+			дистрибутив ко всем выше и ниже
+			перечисленным.</font></font></font></p>
+			<ul>
+				<li><p align="justify" style="margin-top: 0.49cm; margin-bottom: 0cm">
+				<font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Извлекаем
+				все файлы из iso образа Windows 7/8/8.1 в корень
+				флешки</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Прописываем
+				в Menu.lst следующие строчки</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0.49cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">title
+				Установка Windows 7/8/8.1</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				--unmap=0:0xff</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				--unhook</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">root
+				(hd0,0)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">chainloader
+				/bootmgr</span></font></font></font></p></li>
+			</ul>
+			<p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">8.
+			Добавляем Ubuntu 14.04 x86 (будет справедливо
+			и для более ранних версий)</font></font></font></p>
+			<ul>
+				<li><p align="justify" style="margin-top: 0.49cm; margin-bottom: 0cm">
+				<font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Создаём
+				в корне флешки папку ubuntu</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Копируем
+				в эту папку образ
+				дистрибутива</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#0000ff"><u><a href="http://releases.ubuntu.com/14.04/ubuntu-14.04-desktop-i386.iso"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">ubuntu-14.04-desktop-i386.iso</font></font></font></a></u></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">и
+				два файла из этого образа:</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#0000ff"><u><a href="https://yadi.sk/d/DsvyQBZ8TYSje"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">initrd.lz</font></font></font></a></u></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">и</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#0000ff"><u><a href="https://yadi.sk/d/Sx9yfDADTYT7D"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">vmlinuz</font></font></font></a></u></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Прописываем
+				в Menu.lst следующие строчки</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0.49cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">title
+				Установка ubuntu-14.04-desktop-i386&nbsp;</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">kernel
+				/ubuntu/vmlinuz
+				iso-scan/filename=/ubuntu/ubuntu-14.04-desktop-i386.iso
+				boot=casper only-ubiquity initrd=/casper/initrd.lz locale=ru_RU
+				quiet splash -- &nbsp;</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">initrd
+				/ubuntu/initrd.lz</span></font></font></font></p></li>
+			</ul>
+			<p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">9.
+			Добавляем Ubuntu 14.04 x64 (всё аналогично,
+			кроме небольшого изменения)</font></font></font></p>
+			<ul>
+				<li><p align="justify" style="margin-top: 0.49cm; margin-bottom: 0cm">
+				<font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Создаём
+				в корне флешки папку ubuntu</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Копируем
+				в эту папку образ
+				дистрибутива</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#0000ff"><u><a href="http://releases.ubuntu.com/14.04/ubuntu-14.04-desktop-amd64.iso"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">ubuntu-14.04-desktop-amd64.iso</font></font></font></a></u></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">и
+				два файла из этого образа:</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#0000ff"><u><a href="https://yadi.sk/d/no5_jZLwTYTsB"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">initrd.lz</font></font></font></a></u></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">и</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#0000ff"><u><a href="https://yadi.sk/d/40YIwjneTYUAF"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">vmlinuz.efi</font></font></font></a></u></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Прописываем
+				в Menu.lst следующие строчки</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0.49cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">title
+				Установка ubuntu-14.04-desktop-amd64&nbsp;</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">kernel
+				/ubuntu/vmlinuz.efi
+				iso-scan/filename=/ubuntu/ubuntu-14.04-desktop-amd64.iso
+				boot=casper only-ubiquity initrd=/casper/initrd.lz locale=ru_RU
+				quiet splash -- &nbsp;</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">initrd
+				/ubuntu/initrd.lz</span></font></font></font></p></li>
+			</ul>
+			<p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">10.
+			Добавляем практически любой iso образ,
+			который будет предварительно
+			распаковываться в оперативную память
+			компьютера. Конечно при этом количество
+			ОЗУ должно быть больше размера этого
+			самого iso-шника, иначе получите ошибку</font></font></font></p>
+			<ul>
+				<li><p align="justify" style="margin-top: 0.49cm; margin-bottom: 0cm">
+				<font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Создаём
+				в корне флешки папку iso</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Копируем
+				в эту папку нужный iso образ с именем,
+				к примеру, file.iso</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Прописываем
+				в Menu.lst следующие строчки</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0.49cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">title
+				Загрузка file.iso</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				/iso/file.iso (0xFF) || map --mem /iso/file.iso (0xFF)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				--hook</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">chainloader
+				(0xFF)</span></font></font></font></p></li>
+			</ul>
+			<p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">11.
+			Добавляем Memtest86+ V5.01 (тестирование
+			оперативной памяти на наличие ошибок).
+			Подробнее о программе в моей
+			статье</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#0000ff"><u><a href="http://lazvm-comp.ru/publ/testirovanie_operativnoj_pamjati/1-1-0-14"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Memtest86+v4.20
+			и тестирование оперативной памяти</font></font></font></a></u></font></p>
+			<ul>
+				<li><p align="justify" style="margin-top: 0.49cm; margin-bottom: 0cm">
+				<font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Копируем
+				в корень флешки</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#0000ff"><u><a href="https://cloud.mail.ru/public/55249e3a2296/memtest86%2B-5.01.iso"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Memtest86+
+				V5.01.iso</font></font></font></a></u></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Прописываем
+				в Menu.lst следующие строчки</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0.49cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">title
+				запустить Memtest86+ V5.01 (тестирование
+				ОЗУ)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				--mem /memtest86+-5.01.iso (0xff)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				--hook</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">chainloader
+				(0xff)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">boot</span></font></font></font></p></li>
+			</ul>
+			<p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">12.
+			Добавляем Live-USB сборку SonyaPE 1.04.2011 на
+			основе Windows XP. Это так называемая живая
+			система с кучей полезного софта,
+			которая может быть запущена прямо из
+			флешки на любом компьютере.</font></font></font></p>
+			<ul>
+				<li><p align="justify" style="margin-top: 0.49cm; margin-bottom: 0cm">
+				<font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Скачиваем</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#0000ff"><u><a href="https://cloud.mail.ru/public/36bc62b44f96/SonyaPE_01.04.2011.zip"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">SonyaPE_01.04.2011</font></font></font></a></u></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">и
+				извлекаем все файлы и папки из этого
+				архива в корень USB-носителя</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Прописываем
+				в Menu.lst следующие строчки</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0.49cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">title
+				Запустить Live-USB SonyaPE 1.04.2011</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">chainloader
+				/S386/SETUPLDR.BIN</span></font></font></font></p></li>
+			</ul>
+			<p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">13.</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="1" style="font-size: 8pt">&nbsp;</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Добавляем
+			Live-USB сборку W7PE_x86-x64_UEFI_23.05.2013 на основе
+			Windows 7. Имеются обе разрядности: 32 и 64
+			бита. Это так называемая живая система
+			с кучей полезного софта, которая может
+			быть запущена прямо из флешки на любом
+			компьютере</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="1" style="font-size: 8pt">.</font></font></font></p>
+			<ul>
+				<li><p align="justify" style="margin-top: 0.49cm; margin-bottom: 0cm">
+				<font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Скачиваем</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#0000ff"><u><a href="https://cloud.mail.ru/public/7855afc336e8/W7PEx86x64%28UEFI%2923.05.2013.zip"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">W7PEx86x64(UEFI)23.05.2013</font></font></font></a></u></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">и
+				извлекаем все файлы и папки из этого
+				архива в корень USB-носителя</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Прописываем
+				в Menu.lst следующие строчки</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0.49cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">title
+				Запустить Live-USB W7PE x86_x64 (UEFI) 23.05.2013</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">find
+				--set-root /XMPE/bootmgr</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">chainloader
+				/XMPE/bootmgr</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">boot</span></font></font></font></p></li>
+			</ul>
+			<p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">14.
+			Добавляем Live-USB Knoppix 7.0.4 на основе Debian
+			Linux.</font></font></font></p>
+			<ul>
+				<li><p align="justify" style="margin-top: 0.49cm; margin-bottom: 0cm">
+				<font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Скачиваем</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#0000ff"><u><a href="https://cloud.mail.ru/public/c49b67af6ae7/Knoppix%207.0.4.zip"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Knoppix
+				7.0.4</font></font></font></a></u></font><font color="#000000"><font face="Verdana, serif"><font size="1" style="font-size: 8pt">&nbsp;</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">и
+				извлекаем все файлы и папки из этого
+				архива в корень USB-носителя</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Прописываем
+				в Menu.lst следующие строчки</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0.49cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">title
+				Запустить Live-USB Knoppix 7.0.4</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">root
+				(hd0,0)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">kernel
+				/BOOT/Boot_Knoppix_7.0.4/linux ramdisk_size=100000 init=/etc/init
+				lang=ru apm=power-off vga=791 nomce loglevel=0 quiet
+				BOOT_IMAGE=knoppix knoppix knoppix_dir=KNOPPIX</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">initrd
+				/BOOT/Boot_Knoppix_7.0.4/minirt.gz</span></font></font></font></p></li>
+			</ul>
+			<p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">15.
+			Добавляем Live-USB Pmagic 2012.12.25 на основе
+			Linux.&nbsp; Небольшой дистрибутив,
+			предназначенный для разбиения жёстких
+			дисков и восстановления данных.</font></font></font></p>
+			<ul>
+				<li><p align="justify" style="margin-top: 0.49cm; margin-bottom: 0cm">
+				<font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Скачиваем</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#0000ff"><u><a href="https://cloud.mail.ru/public/d782f35af93e/Pmagic%202012.12.25.zip"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Pmagic
+				2012.12.25</font></font></font></a></u></font><font color="#000000"><font face="Verdana, serif"><font size="1" style="font-size: 8pt">&nbsp;</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">и
+				извлекаем все файлы и папки из этого
+				архива в корень USB-носителя</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Прописываем
+				в Menu.lst следующие строчки</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0.49cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">title
+				Запустить Live-USB Pmagic 2012.12.25</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				--unmap=0:0xff</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				--unhook</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">root
+				(hd0,0)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				/pmagic/pmagic_2012_12_25.iso (0xff) || map --mem
+				/pmagic/pmagic_2012_12_25.iso (0xff)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				--hook</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">root
+				(0xff)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">configfile
+				/grub4dos.lst || chainloader (0xff)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				--unmap=0:0xff</span></font></font></font></p></li>
+			</ul>
+			<p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">16.
+			Добавляем Live-USB PuppyRus-203 на основе Linux.</font></font></font></p>
+			<ul>
+				<li><p align="justify" style="margin-top: 0.49cm; margin-bottom: 0cm">
+				<font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Скачиваем</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">&nbsp;</font></font></font><font color="#0000ff"><u><a href="https://cloud.mail.ru/public/3b7d5f921a92/PuppyRus-203.zip"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">PuppyRus-203</font></font></font></a></u></font><font color="#000000"><font face="Verdana, serif"><font size="1" style="font-size: 8pt">&nbsp;</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">и
+				извлекаем все файлы и папки из этого
+				архива в корень USB-носителя</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Прописываем
+				в Menu.lst следующие строчки</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0.49cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">title
+				Запустить Live-USB PuppyRus-203-FF-m</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">configfile
+				(hd0,0)/boot/Puppy/menu.lst</span></font></font></font></p></li>
+			</ul>
+			<p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">17.
+			Добавляем Victoria 3.52. (Компьютерная
+			программа, предназначенная для оценки
+			работоспособности, тестирования и
+			мелкого ремонта жёстких дисков)</font></font></font></p>
+			<ul>
+				<li><p align="justify" style="margin-top: 0.49cm; margin-bottom: 0cm">
+				<font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Скачиваем&nbsp;</font></font></font><font color="#0000ff"><u><a href="https://cloud.mail.ru/public/17a3c0533ce2/Victoria%203.52.zip"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Victoria
+				3.52</font></font></font></a></u></font><font color="#000000"><font face="Verdana, serif"><font size="1" style="font-size: 8pt">&nbsp;</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">и
+				извлекаем все файлы и папки из этого
+				архива в корень USB-носителя</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Прописываем
+				в Menu.lst следующие строчки</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0.49cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">title
+				Запустить Victoria 3.52 (утилита для
+				низкоуровневой диагностики жесткого
+				диска)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				--mem /boot/victoria.ima (fd0)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				--hook</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">chainloader
+				(fd0)+1</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">rootnoverify
+				(fd0)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				--floppies=1</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">boot</span></font></font></font></p></li>
+			</ul>
+			<p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">18.
+			Добавляем MHDD v4.6. (Компьютерная программа,
+			предназначенная для оценки
+			работоспособности, тестирования и
+			мелкого ремонта жёстких дисков)</font></font></font></p>
+			<ul>
+				<li><p align="justify" style="margin-top: 0.49cm; margin-bottom: 0cm">
+				<font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Скачиваем&nbsp;</font></font></font><font color="#0000ff"><u><a href="https://cloud.mail.ru/public/8a65a585b6e0/MHDD%20v4.6.zip"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">MHDD
+				v4.6</font></font></font></a></u></font><font color="#000000"><font face="Verdana, serif"><font size="1" style="font-size: 8pt">&nbsp;</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">и
+				извлекаем все файлы и папки из этого
+				архива в корень USB-носителя</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Прописываем
+				в Menu.lst следующие строчки</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0.49cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">title
+				Запустить MHDD v4.6 (утилита для
+				низкоуровневой диагностики жесткого
+				диска) &nbsp;</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				--mem /MHDD_v4.6.ima (fd0) &nbsp;</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				--hook &nbsp;</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">chainloader
+				(fd0)+1 &nbsp;</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">rootnoverify
+				(fd0) &nbsp;</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				--floppies=1</span></font></font></font></p></li>
+			</ul>
+			<p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">19.
+			Добавляем Acronis Rescue Media 2010 Rus FULLv2.
+			(Универсальный загрузочный диск,
+			содержащий пакет программ для полного
+			резервного копирования, позволяющий
+			создавать точные образы жесткого
+			диска и/или отдельных его разделов,
+			управлять разделами — создание,
+			перемещение, слияние, деление)</font></font></font></p>
+			<ul>
+				<li><p align="justify" style="margin-top: 0.49cm; margin-bottom: 0cm">
+				<font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Скачиваем&nbsp;</font></font></font><font color="#0000ff"><u><a href="https://cloud.mail.ru/public/f7c534103499/Acronis%20Rescue%20Media%202010%20Rus%20FULLv2.zip"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Acronis
+				Rescue Media 2010 Rus FULLv2</font></font></font></a></u></font><font color="#000000"><font face="Verdana, serif"><font size="1" style="font-size: 8pt">&nbsp;</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">и
+				извлекаем все файлы и папки из этого
+				архива в корень USB-носителя</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Прописываем
+				в Menu.lst следующие строчки</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0.49cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">title
+				Запустить Acronis Rescue Media 2010 Rus FULLv2</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">find
+				--set-root /arsm2010.iso</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				/arsm2010.iso (0xff) || map --mem /arsm2010.iso (0xff)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				--hook</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">chainloader
+				(0xff)</span></font></font></font></p></li>
+			</ul>
+			<p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">20.
+			Добавляем Clonezilla-live-2.2.0-29-i486. (Свободное
+			программное обеспечение с открытым
+			исходным кодом, предназначенное для
+			клонирования дисков и отдельных
+			разделов жёсткого диска, а также
+			создания резервных копий и аварийного
+			восстановления системы)</font></font></font></p>
+			<ul>
+				<li><p align="justify" style="margin-top: 0.49cm; margin-bottom: 0cm">
+				<font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Скачиваем&nbsp;</font></font></font><font color="#0000ff"><u><a href="https://cloud.mail.ru/public/18dee62977eb/Clonezilla-live-2.2.0-29-i486.zip"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Clonezilla-live-2.2.0-29-i486</font></font></font></a></u></font><font color="#000000"><font face="Verdana, serif"><font size="1" style="font-size: 8pt">&nbsp;</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">и
+				извлекаем все файлы и папки из этого
+				архива в корень USB-носителя</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Прописываем
+				в Menu.lst следующие строчки</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0.49cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">title
+				Запустить Clonezilla-live-2.2.0-29-i486</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">root
+				(hd0,0)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">kernel
+				/clonezilla/live/vmlinuz boot=live config
+				live-media-path=/clonezilla/live</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">initrd=/clonezilla/live/initrd.img</span></font></font></font></p></li>
+			</ul>
+			<p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">21.
+			Добавляем gparted-live-0.18.0-2-i486. (Live CD&nbsp;версия
+			на основе Debian Linux программы GParted, которая
+			является редактором дисковых разделов
+			предназначенная для различных операций
+			с разделами (и файловыми системами,
+			находящимися на них), таких как:
+			создание, уничтожение, изменение
+			размера, перемещение, проверка и
+			копирование)</font></font></font></p>
+			<ul>
+				<li><p align="justify" style="margin-top: 0.49cm; margin-bottom: 0cm">
+				<font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Скачиваем&nbsp;</font></font></font><font color="#0000ff"><u><a href="https://cloud.mail.ru/public/8ac3ae0a5d33/gparted-live-0.18.0-2-i486.zip"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">gparted-live-0.18.0-2-i486</font></font></font></a></u></font><font color="#000000"><font face="Verdana, serif"><font size="1" style="font-size: 8pt">&nbsp;</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">и
+				извлекаем все файлы и папки из этого
+				архива в корень USB-носителя</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Прописываем
+				в Menu.lst следующие строчки</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0.49cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">title
+				Запустить gparted-live-0.18.0-2-i486</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">find
+				--set-root /gparted/live/vmlinuz</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">kernel
+				/gparted/live/vmlinuz boot=live config noswap noprompt
+				live-media-path=/gparted/live toram=filesystem.squashfs
+				ip=frommedia nosplash</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">initrd
+				/gparted/live/initrd.img</span></font></font></font></p></li>
+			</ul>
+			<p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">22.
+			Добавляем Partition wizard 8.1.1. (Менеджер для
+			работы с разделами жесткого диска. С
+			его помощью можно изменять размер
+			раздела, создавать новый раздел на
+			жестком диске, удалять и форматировать
+			уже существующие разделы. Позволяет
+			работать не только с отдельными
+			жесткими дисками, но и дисками,
+			объединенными в RAID-массивы)</font></font></font></p>
+			<ul>
+				<li><p align="justify" style="margin-top: 0.49cm; margin-bottom: 0cm">
+				<font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Скачиваем&nbsp;</font></font></font><font color="#0000ff"><u><a href="https://cloud.mail.ru/public/0dc8687323f1/Partition%20Wizard%208.1.1.zip"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Partition
+				wizard 8.1.1</font></font></font></a></u></font><font color="#000000"><font face="Verdana, serif"><font size="1" style="font-size: 8pt">&nbsp;</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">и
+				извлекаем все файлы и папки из этого
+				архива в корень USB-носителя</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Прописываем
+				в Menu.lst следующие строчки</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0.49cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">title
+				Запустить Partition Wizard 8.1.1 Boot Disc</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">find
+				--set-root /Partition_wizard_8.1/bzImage</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">kernel
+				/Partition_wizard_8.1/bzImage ramdisk_size=104858 root=/dev/ram0
+				rw</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">initrd
+				/Partition_wizard_8.1/tinycore.gz</span></font></font></font></p></li>
+			</ul>
+			<p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">23.
+			Добавляем Kon-Boot 2.0. (Программное
+			обеспечение, которое позволяет изменять
+			содержание ядра Linux/Windows на лету загружая
+			программу с live cd/usb. Позволяет сбрасывать
+			пароли в Linux, так и становиться root
+			пользователем, не вбивая правильный
+			пароль. Для Windows систем утилита позволяет
+			входить в любой защищенный паролем
+			профиль без знания пароля)</font></font></font></p>
+			<ul>
+				<li><p align="justify" style="margin-top: 0.49cm; margin-bottom: 0cm">
+				<font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Скачиваем&nbsp;</font></font></font><font color="#0000ff"><u><a href="https://cloud.mail.ru/public/675e0549f611/Kon-Boot%202.0.zip"><font color="#a70003"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Kon-Boot
+				2.0</font></font></font></a></u></font><font color="#000000"><font face="Verdana, serif"><font size="1" style="font-size: 8pt">&nbsp;</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">и
+				извлекаем все файлы и папки из этого
+				архива в корень USB-носителя</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Прописываем
+				в Menu.lst следующие строчки</font></font></font></p></li>
+				<li><p align="justify" style="margin-bottom: 0.49cm"><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">title
+				Запустить Kon-Boot 2.0</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">set
+				kon=konboot.gz</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">find
+				--set-root /IMAGES/KONBOOT.GZ | set iscd=</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">find
+				--set-root /IMAGES/KONBOOT.GZ &amp;&amp; set kon=KONBOOT.GZ</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				--mem /IMAGES/%kon% (fd0)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				--hook</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">chainloader
+				(fd0)+1</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">if
+				not &quot;%iscd%&quot;==&quot;(cd)&quot; pause --wait=2 HDD
+				SWAP</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">if
+				not &quot;%iscd%&quot;==&quot;(cd)&quot; map (hd1) (hd0) &nbsp;</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				--hook</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">rootnoverify
+				(fd0)</span></font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt"><span style="background: #d3d3d3">map
+				--floppies=1</span></font></font></font></p></li>
+			</ul>
+			<p align="justify"><font color="#000000"><font face="Verdana, serif"><font size="1" style="font-size: 8pt"><br/>
+</font></font></font><font color="#000000"><font face="Verdana, serif"><font size="2" style="font-size: 10pt">Остались
+			вопросы? Задавайте их в комментариях!<br/>
+А
+			пока на этом остановлюсь. Статья будет
+			обновляться и дополняться материалом.<br/>
+Всё
+			эти пункты будут работать на одной
+			флешке без проблем (при достаточном
+			её размере конечно).<br/>
+Удачных загрузок
+			с USB-носителей)))</font></font></font></p>
+		</td>
+	</tr>
+</table>
+<p style="margin-bottom: 0.35cm"><br/>
+<br/>
+
+</p>
+</body>
+</html>

@@ -1,0 +1,14 @@
+﻿
+WIN7PE COMPACT
+
+\sources\BOOT-win7pe-compact.WIM
+\boot\boot.sdi
+\windows\system32\boot\winload.exe
+\windows
+ru-ru
+
+
+
+
+
+

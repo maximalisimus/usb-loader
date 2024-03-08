@@ -1,0 +1,20 @@
+﻿
+BOOTICEx86_ru
+
+MBR -> GRUB4DOS
+PBR -> SYSLINUX 5.10 :
+
+SYSLINUX.CFG: boot/syslinux/syslinux.cfg
+
+
+title SYSLINUX 
+find --set-root --ignore-floppies /LDLINUX.SYS 
+chainloader +1 
+
+LABEL GRUB4DOS 
+MENU LABEL Grub4dos 
+BOOT /grldr
+
+
+
+
