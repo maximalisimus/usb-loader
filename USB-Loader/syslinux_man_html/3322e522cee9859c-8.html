@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+<title>Page 8</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<style type="text/css">
+<!--
+	p {margin: 0; padding: 0;}	.ft00{font-size:33px;font-family:Times;color:#000000;}
+	.ft01{font-size:19px;font-family:Times;color:#000000;}
+	.ft02{font-size:19px;font-family:Times;color:#000000;}
+	.ft03{font-size:22px;font-family:Times;color:#000000;}
+	.ft04{font-size:19px;line-height:25px;font-family:Times;color:#000000;}
+-->
+</style>
+</head>
+<body bgcolor="#A0A0A0" vlink="blue" link="blue">
+<div id="page8-div" style="position:relative;width:918px;height:1188px;">
+<img width="918" height="1188" src="3322e522cee9859c008.png" alt="background image"/>
+<p style="position:absolute;top:14px;left:8px;white-space:nowrap" class="ft00"><b>Конфигурационный	файл</b></p>
+<p style="position:absolute;top:77px;left:8px;white-space:nowrap" class="ft04">Все	настраиваемые	параметры	<b>Syslinux</b>	могут	быть	изменены	с	помощью<br/>файла	syslinux.cfg,	находящегося	в	корне	загрузочного	устройства.</p>
+<p style="position:absolute;top:151px;left:8px;white-space:nowrap" class="ft04">Это	текстовый	файл	в	формате	<b>UNIX</b>	или	<b>DOS</b>,	содержащий	одну	или<br/>несколько	из	следующих	строк	(ключевые	слова	нечувствительны	к	регистру;<br/>слова	набранные	CapsLock-ом	означают,	что	их	надо	писать	точно	так	же,	как<br/>они	написаны	здесь):</p>
+<p style="position:absolute;top:276px;left:8px;white-space:nowrap" class="ft04">Начиная	с	версии	3.35,	конфигурационный	файл	может	быть	также	в<br/>директории	/boot/syslinux	или	/syslinux	(поиск	выполняется	именно	в	таком<br/>порядке.)<br/>В	этом	случае	имена	файлов	считаются	от	места	расположения<br/>конфигурационного	файла,	если	они	не	начинаются	с	\	или	/.</p>
+<p style="position:absolute;top:427px;left:8px;white-space:nowrap" class="ft04">Все	опции	ниже	подходят	для	<b>SYSLINUX</b>,	<b>ISOLINUX</b>,	<b>PXELINUX</b>	и<br/><b>EXTLINUX</b>,	если	не	указано	иное;	подробнее	см.	их	документацию.</p>
+<p style="position:absolute;top:501px;left:8px;white-space:nowrap" class="ft01">Вот	пример	пункта	загрузки:</p>
+<p style="position:absolute;top:555px;left:14px;white-space:nowrap" class="ft04">DEFAULT	linux<br/>LABEL	linux<br/>SAY	Now	booting	the	kernel	from	SYSLINUX...<br/>KERNEL	vmlinuz.img<br/>APPEND	ro	root=/dev/sda1	initrd=initrd.img</p>
+<p style="position:absolute;top:793px;left:8px;white-space:nowrap" class="ft03"><b>Компоненты	конфигурационного	файла</b></p>
+<p style="position:absolute;top:846px;left:8px;white-space:nowrap" class="ft03"><b>#	comment</b></p>
+<p style="position:absolute;top:900px;left:8px;white-space:nowrap" class="ft04">									Комментарий.	Все	символы	от	#	до	перевода	на	новую	строку<br/>игнорируются.</p>
+<p style="position:absolute;top:976px;left:8px;white-space:nowrap" class="ft03"><b>INCLUDE	имя_файла</b></p>
+<p style="position:absolute;top:1030px;left:51px;white-space:nowrap" class="ft04">Вставляет	содержимое	другого	файла	в	этом	же	месте<br/>этого	конфигурационного	файла.	Друг	в	друга	можно	вставлять	до	16<br/>файлов,	но	нормальная	работа	гарантирована	при	не	более	чем	8-кратной<br/>вставке.</p>
+</div>
+</body>
+</html>

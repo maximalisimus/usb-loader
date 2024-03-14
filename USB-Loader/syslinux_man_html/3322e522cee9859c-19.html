@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+<title>Page 19</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<style type="text/css">
+<!--
+	p {margin: 0; padding: 0;}	.ft00{font-size:19px;font-family:Times;color:#000000;}
+	.ft01{font-size:19px;font-family:Times;color:#559b36;}
+	.ft02{font-size:19px;font-family:Times;color:#000000;}
+	.ft03{font-size:19px;line-height:25px;font-family:Times;color:#000000;}
+	.ft04{font-size:19px;line-height:26px;font-family:Times;color:#000000;}
+	.ft05{font-size:19px;line-height:25px;font-family:Times;color:#000000;}
+-->
+</style>
+</head>
+<body bgcolor="#A0A0A0" vlink="blue" link="blue">
+<div id="page19-div" style="position:relative;width:918px;height:1188px;">
+<img width="918" height="1188" src="3322e522cee9859c019.png" alt="background image"/>
+<p style="position:absolute;top:38px;left:8px;white-space:nowrap" class="ft03">В	папку	boot\syslinux\images	помещаем	картинку	которая	станет	фоном	при<br/>загрузке	с	флешки.<br/>Формат	её	должен	быть	*.png	640x480	например	</p>
+<p style="position:absolute;top:90px;left:575px;white-space:nowrap" class="ft01"><a href="��"><b>makabe.png</b></a></p>
+<p style="position:absolute;top:141px;left:8px;white-space:nowrap" class="ft03">Можно	считать,	что	установка	загрузчика	завершена,	теперь	нужно	наполнить<br/>флешку	содержимым<br/>и	отобразить	его	запуск	в	конфигурационном	файле	syslinux.cfg</p>
+<p style="position:absolute;top:245px;left:8px;white-space:nowrap" class="ft03">Не	будем	здесь	углубляться	во	все	тонкости	настроек	файла	syslinux.cfg,<br/>изучите	тот,	что	здесь	прикреплён	<br/>и	многое	вам	станет	понятно,	например	вы	поймёте	как	устанавливается<br/>таймер,	картинка,	файл	шрифта	и.т.д<br/>некоторые	места	в	этом	файле	снабжены	комментариями.</p>
+<p style="position:absolute;top:401px;left:8px;white-space:nowrap" class="ft00">Уделим	внимание	загрузке	3х	различных	сред,	-	<b>DOS</b>,	<b>Linux</b>,	<b>Windows</b>.</p>
+<p style="position:absolute;top:478px;left:8px;white-space:nowrap" class="ft05">4.	В	следующих	действиях	нам	нужно	будет	редактировать	файл	syslinux.cfg,<br/>чтобы	делать	это	в	<b>Windows<br/></b>используйте	редактор<a href="��">	</a></p>
+<p style="position:absolute;top:530px;left:263px;white-space:nowrap" class="ft01"><a href="��"><b>Notepad++</b></a></p>
+<p style="position:absolute;top:530px;left:402px;white-space:nowrap" class="ft00"><a href="��">.</a>	Для	корректного	отображения	Русских</p>
+<p style="position:absolute;top:556px;left:8px;white-space:nowrap" class="ft03">букв	используйте	кодировку:<br/><b>Кириллица	OEM	866</b>.</p>
+<p style="position:absolute;top:689px;left:8px;white-space:nowrap" class="ft02"><b>Загрузка	DOS	Систем</b></p>
+<p style="position:absolute;top:743px;left:8px;white-space:nowrap" class="ft03">5.	<b>ДОС</b>	Системы	обычно	*.IMA	или	*.VFD	файлы,	это	образы	загрузочных<br/>дискет.<br/>Стоит	заметить,	что	в	таком	образе	может	быть	не	только	<b>ДОС</b>	(Дисковая<br/>Операционная	Система),<br/>но	и	другие	менее	популярные	ОС	(Например	Колибри)</p>
+<p style="position:absolute;top:898px;left:8px;white-space:nowrap" class="ft03">При	загрузке	таких	вещей	нам	не	обойтись	без	файла	memdisk,	найдите	его	в<br/>комплекте	и	поместите	в	папку	/boot</p>
+<p style="position:absolute;top:976px;left:8px;white-space:nowrap" class="ft00">Поместите	на	флешку	нужный	образ	-	/boot/dos/dos.ima</p>
+<p style="position:absolute;top:1028px;left:8px;white-space:nowrap" class="ft00">Пункт	запуска	в	конфигурационном	файле	будет	выглядеть	вот	так:</p>
+<p style="position:absolute;top:1086px;left:14px;white-space:nowrap" class="ft03">LABEL	-<br/>MENU	LABEL	MS	DOS<br/>KERNEL	/boot/memdisk</p>
+</div>
+</body>
+</html>

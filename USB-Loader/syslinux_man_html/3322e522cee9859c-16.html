@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+<title>Page 16</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<style type="text/css">
+<!--
+	p {margin: 0; padding: 0;}	.ft00{font-size:19px;font-family:Times;color:#000000;}
+	.ft01{font-size:22px;font-family:Times;color:#000000;}
+	.ft02{font-size:19px;font-family:Times;color:#000000;}
+	.ft03{font-size:15px;font-family:Times;color:#000000;}
+	.ft04{font-size:19px;line-height:25px;font-family:Times;color:#000000;}
+	.ft05{font-size:15px;line-height:19px;font-family:Times;color:#000000;}
+-->
+</style>
+</head>
+<body bgcolor="#A0A0A0" vlink="blue" link="blue">
+<div id="page16-div" style="position:relative;width:918px;height:1188px;">
+<img width="918" height="1188" src="3322e522cee9859c016.png" alt="background image"/>
+<p style="position:absolute;top:11px;left:14px;white-space:nowrap" class="ft04">0000010:	6f77	206f	6e20	426c	7565	2042	6163	6b67				<br/>0000020:	726f	756e	640a																								</p>
+<p style="position:absolute;top:96px;left:51px;white-space:nowrap" class="ft00">Мигание	жёлтым	на	синем	фоне.</p>
+<p style="position:absolute;top:146px;left:8px;white-space:nowrap" class="ft01"><b>Отображение	графики:</b></p>
+<p style="position:absolute;top:206px;left:14px;white-space:nowrap" class="ft04">&lt;CAN&gt;имя_файла&lt;newline&gt;												&lt;CAN&gt;	=	&lt;Ctrl-X&gt;	=	ASCII<br/>24</p>
+<p style="position:absolute;top:290px;left:51px;white-space:nowrap" class="ft04">Если	доступен	<b>VGA</b>,	перейти	в	графический	режим	и	показать	картинку	из<br/>указанного	файла.<br/>Формат	файла	-	<b>LSS16</b>;<br/><b>Perl</b>	программу	-	<b>&#34;ppmtolss16&#34;</b>	можно	использовать	для	получения	таких<br/>файлов.</p>
+<p style="position:absolute;top:446px;left:51px;white-space:nowrap" class="ft04">Картинка	показана	в	режиме	640x480	16	цветов.<br/>В	графическом	режиме	цвета	фона	и	текста	(указанные	кодом	&lt;SI&gt;)<br/>работают	по-другому:<br/>фоновый	цвет	игнорируется,	а	цвет	текста	берётся	из	палитры	картинки.<br/>Таким	образом,	<b>ppmtolss16</b>	даёт	возможность	использовать	цвета,<br/>отличающиеся	от	стандартных.</p>
+<p style="position:absolute;top:627px;left:51px;white-space:nowrap" class="ft04">Цветовые	индексы	0	и	7,	следует	выбирать	с	осторожностью,	т.к	0	-	это<br/>цвет	фона,	а	7	-	цвет	текста	используемый	<b>Syslinux</b>.</p>
+<p style="position:absolute;top:704px;left:8px;white-space:nowrap" class="ft01"><b>Возвращение	в	текстовый	режим:</b></p>
+<p style="position:absolute;top:763px;left:14px;white-space:nowrap" class="ft00">&lt;EM&gt;						&lt;EM&gt;	=	&lt;Ctrl-Y&gt;	=	ASCII	25</p>
+<p style="position:absolute;top:822px;left:8px;white-space:nowrap" class="ft00">Если	мы	в	графическом	режиме,	вернуться	в	текстовый:</p>
+<p style="position:absolute;top:880px;left:14px;white-space:nowrap" class="ft00">&lt;DLE&gt;..&lt;ETB&gt;						&lt;Ctrl-P&gt;..&lt;Ctrl-W&gt;	=	ASCII	16-23</p>
+<p style="position:absolute;top:938px;left:51px;white-space:nowrap" class="ft04">Эти	коды	могут	быть	использованы	для	указания	сообщений,	печатаемых<br/>в	разных	режимах:</p>
+<p style="position:absolute;top:1033px;left:68px;white-space:nowrap" class="ft05">Символ																							Текст.				Графич.			Консоль<br/>------------------------------------------------------<br/>&lt;DLE&gt;	=	&lt;Ctrl-P&gt;	=	ASCII	16					No						No						No<br/>&lt;DC1&gt;	=	&lt;Ctrl-Q&gt;	=	ASCII	17					Yes					No						No<br/>&lt;DC2&gt;	=	&lt;Ctrl-R&gt;	=	ASCII	18					No						Yes					No<br/>&lt;DC3&gt;	=	&lt;Ctrl-S&gt;	=	ASCII	19					Yes					Yes					No<br/>&lt;DC4&gt;	=	&lt;Ctrl-T&gt;	=	ASCII	20					No						No						Yes</p>
+</div>
+</body>
+</html>
