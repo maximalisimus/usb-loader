@@ -111,7 +111,7 @@ for /r %Y in (*.c32) do copy "%Y" Z:\boot\syslinux" /y
 В Linux-е это можно сделать так.
 
 cd syslinux-5.10
-find ./ -type f -iname "*/c32" -exec cp -f {} /run/media/user/flash-card-name/boot/syslinux +;
+find ./ -type f -iname "*.c32" -exec cp -f {} /run/media/user/flash-card-name/boot/syslinux +;
 
 
 
