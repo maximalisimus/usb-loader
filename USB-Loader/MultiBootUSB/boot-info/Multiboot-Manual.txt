@@ -1,4 +1,4 @@
-
+﻿
 
 Запись Grub4Dos и Syslinux через терминал или командную строку, т.е. вручную.
 
@@ -89,6 +89,34 @@ syslinux.exe -sf -d /boot/syslinux z:
 
 Следующие опции подходят только для Windows:-m MBR; установить загрузчик в MBR.
 -a Active; пометить раздел на устройстве как загружаемый (=bootable)Эта команда, осуществима только в Linux:-o Указывает байт смещения образа файловой системы в файле. Онадолжна быть использована с файлом образа диска.
+
+
+
+cmd.bat
+
+@cd/d "%~dp0"
+@echo off
+SET PATH=%CD%\;%PATH%
+cmd.exe
+
+
+
+
+Не забудьте заменить файлы Syslinux формата (*.c32) в зависимости от версии которую вы выбрали в директории /boot/syslinux. Рекомендую версию 5.10.
+В Windows это можно сделать так.
+
+cd syslinux-5.10
+for /r %Y in (*.c32) do copy "%Y" Z:\boot\syslinux" /y
+
+В Linux-е это можно сделать так.
+
+cd syslinux-5.10
+find ./ -type f -iname "*/c32" -exec cp -f {} /run/media/user/flash-card-name/boot/syslinux +;
+
+
+
+
+
 
 
 
