@@ -9,3 +9,61 @@ boot=casper persistent persistent-path=/casper-rw
 dd if=/dev/zero of=casper-rw bs=1M  count=4096
 mkfs.ext4 -F -O^has_journal -L casper-rw casper-rw
 
+
+
+set p="persistent  persistence-label=F32  persistent-path=/u22 showmounts show-cow"
+set r="locale=ru_RU bootkbd=ru console-setup/layoutcode=ru"
+linux (loop)/casper/vmlinuz $p $r boot=casper iso-scan/filename=${isofile} quiet noeject noprompt --
+initrd (loop)/casper/initrd.lz
+
+menuentry "Ubuntu [RU]" {
+      set gfxpayload=keep
+      set p="persistent  persistence-label=F32  persistent-path=/u22 showmounts show-cow"
+      set r="locale=ru_RU bootkbd=ru console-setup/layoutcode=ru"
+      set d=u22
+      set u="username=live hostname=$d"
+      search --no-floppy --file --set=root /$d/vmlinuz
+      linux   /$d/vmlinuz $r $p $u live-media-path=/$d boot=casper quiet splash -- 
+      #locale=ru_RU.UTF-8
+      initrd  /$d/initrd
+}
+
+
+persistent
+Casper будет искать постоянные и моментальные разделы или файлы с меткой «casper- rw", 
+"home-rw" и файлы с именами "casper-sn*", "home-sn*" и попытается это сделать в Порядок: 
+первый смонтируйте как /cow, второй смонтируйте в /home и просто скопируйте содержимое 
+последних в соответствующих местах (снимках). Снимки будут пробовал обновляться 
+при перезагрузке/выключении.
+
+persistent-path
+Casper будет искать файлы персистентности в корневом каталоге раздела. 
+С этот параметр, путь можно настроить так, чтобы у вас было несколько каталоги 
+в том же разделе для хранения файлов персистентности.
+
+showmounts
+Этот параметр заставит Casper отображать в "/" файловые системы ro (в основном сжатый) в /casper. 
+По умолчанию это не включено, поскольку может привести к проблемы с такими приложениями, 
+как «mono», которые сохраняют двоичные пути при установке.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
