@@ -1,0 +1,11 @@
+
+
+boot=casper persistent-path=/ubuntu/casper-rw
+persistent persistent-path=/boot/casper
+
+boot=casper persistent persistent-path=/casper-rw
+
+
+dd if=/dev/zero of=casper-rw bs=1M  count=4096
+mkfs.ext4 -F -O^has_journal -L casper-rw casper-rw
+
