@@ -55,8 +55,24 @@ setWOW64.exe
 
 
 
+%windir%\system32\catroot
+%windir%\system32\drivers\etc
+%windir%\system32\catroot2
+%windir%\system32\logfiles
+%windir%\system32\driverstore
+%windir%\system32\spool
 
 
+
+Ntdll.dll
+Kernel32.dll
+Kernel32.dll, Advapi32.dll, User32.dll, Gdi32.dll
+Ntoskrnl.exe - Executive and kernel
+Hal.dll - HAL
+Win32k.sys - kernel-mode part of the windows subsystem (GUI)
+Hvix64.exe - Intel Hypervisor
+Hvax64.exe - AMD Hypervisor
+.sys files in \systeRoot\System32\Drivers core driver files, such as DirectX, VolumeManager, TCP\IP, TPM, and ACPI support.
 
 
 
