@@ -1,5 +1,35 @@
 ﻿
 
+http://mistyprojects.co.uk/documents/winpe_tweaks/readme.files/WoW6432Node.htm
+
+Assuming an .iso file is used, you will need to extract the SOFTWARE hive from \Sources\install.wim and then complete a number of tasks. These are detailed below.
+1. Extract the SOFTWARE hive. 7-zip can be used for this purpose - use the 7-zip file manager and open the .iso file > then browse to \Sources\install.wim > use the open inside option > Select an image if multiple images are present > browse to \Windows\System32\config > extract SOFTWARE (e.g. to C:\Install_Wim_Files\software).
+2. Mount the Software hive extracted in step 1. E.g.
+reg.exe load HKLM\_WinPE_SOFTWARE C:\Install_Wim_Files\software
+3. Export the Wow6432Node key from the Software hive mounted in step 2. E.g.
+reg.exe export HKEY_LOCAL_MACHINE\_WinPE_SOFTWARE\Wow6432Node C:\Wow6432Node.reg
+4. Export the Classes\Wow6432Node key from the Software hive mounted in step 2. E.g.
+reg.exe export HKEY_LOCAL_MACHINE\_WinPE_SOFTWARE\Classes\Wow6432Node C:\Classes_Wow6432Node.reg
+5. Open the .reg files exported in steps 3 and 4 and replace all references to C:\ and D:\ with X:\. Notepad.exe can be used for this task. Alternatively use gsar if you want to automate this from the command line. E.g.
+gsar.exe -o -i -sC:x00:::x00\ -rX:x00:::x00\ C:\Wow6432Node.reg
+gsar.exe -o -i -sD:x00:::x00\ -rX:x00:::x00\ C:\Wow6432Node.reg
+gsar.exe -o -i -sC:x00:::x00\ -rX:x00:::x00\ C:\Classes_Wow6432Node.reg
+gsar.exe -o -i -sD:x00:::x00\ -rX:x00:::x00\ C:\Classes_Wow6432Node.reg
+6. Unload the mounted Software hive. E.g.
+reg.exe unload HKLM\_WinPE_SOFTWARE
+7. Mount the WinPE software hive using the same command syntax as in step 2, but changing the path as required. Ensure that you use the same key name as that used in step 2. E.g.
+reg.exe load HKLM\_WinPE_SOFTWARE C:\WinPE_Wim_Files\software
+8. Import the .reg file created in step 3. E.g.
+reg.exe import C:\Wow6432Node.reg
+9. Import the .reg file created in step 4. E.g.
+reg.exe import C:\Classes_Wow6432Node.reg
+10. Delete the Wow6432Node\Microsoft\Active Setup\Installed Components key. E.g.
+reg.exe delete "HKLM\_WinPE_SOFTWARE\Wow6432Node\Microsoft\Active Setup\Installed Components" /f
+11. Unload the mounted Software hive. E.g.
+reg.exe unload HKLM\_WinPE_SOFTWARE
+
+
+
 Adding WoW64 to WinPE 10 for 32-bit app support - V2
 
 \Windows\WinSxS
