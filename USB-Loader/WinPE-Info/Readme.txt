@@ -204,13 +204,15 @@ or
 winpeshl.ini
 
 [LaunchApps]
-%SystemDrive%\Programs\WinXShell-X64\WinXShell.exe -winpe
 cmd.exe, "/k runsetup.cmd"
 
 
 runsetup.cmd
 
 @echo off
+
+start %SystemDrive%\Programs\WinXShell-X64\WinXShell.exe -winpe
+
 Title TishSerg Windows Setup Bootstrapper v1.0
 color 9f
 ver
@@ -221,6 +223,38 @@ powercfg /s 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
 REM Use My background:
 reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d  "%SystemDrive%\Programs\background.jpg" /f
 RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters
+
+
+
+
+
+Background
+
+xcopy %homepath%\Pictures\winpe_wp_800x600.bmp C:\WinPE\x86\mount\Windows\winpe_wp_800x600.bmp
+
+REG LOAD "HKLM\WinPE_DEFAULT" "C:\WinPE\x86\mount\Windows\System32\config\default"
+
+REG ADD "HKLM\WinPE_DEFAULT\Control Panel\Desktop" edit on "Wallpaper" to "%systemroot%\winpe_wp_800x600.bmp"
+
+REG UNLOAD "HKLM\WinPE_DEFAULT"
+
+
+%Path%
+
+REG LOAD "HKLM\WinPE_SYSTEM" "C:\WinPE\x86\mount\Windows\System32\config\SYSTEM"
+
+HKEY_LOCAL_MACHINE\WinPE_SYSTEM\ControlSet001\Control\Session Manager\Environment
+
+Path
+
+%SystemRoot%\system32;%SystemRoot%;%PROGRAMFILES%\Sysinternals\;%PROGRAMFILES%\Total Commander\;%PROGRAMFILES%\Display Changer\;%PROGRAMFILES%\PuTTY;
+
+REG UNLOAD "HKLM\WinPE_SYSTEM"
+
+
+BackGround Size
+
+dc -width=max -height=max -depth=max
 
 
 
@@ -246,10 +280,24 @@ drvload vmxnet3ndis6.inf
 wmic nic get NetConnectionID
 
 wpeinit
+netsh interface ip show config
 netsh interface ipv4 set address name=”Ethernet” source=dhcp
 ipconfig
 
 
+
+netsh interface ip set address name="Local Area Connection" static 192.168.1.25 255.255.255.0 192.168.1.1 1
+netsh interface ip set dns name="Local Area Connection" static 192.168.1.100
+netsh interface ip add dns name="Local Area Connection" 192.168.1.200 index=2
+
+or
+
+netsh interface ip set address name="Local Area Connection" dhcp
+netsh interface ip set dnsservers name="Local Area Connection" source=dhcp
+
+and
+
+net use * \\server\share /user:DOMAIN\USER
 
 
 
