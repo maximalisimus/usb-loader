@@ -223,6 +223,9 @@ powercfg /s 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
 REM Use My background:
 reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d  "%SystemDrive%\Programs\background.jpg" /f
 RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters
+REM reg.exe import "%SystemDrive%\Programs\wallpapers.reg"
+reg ADD "HKLM\Control Panel\Desktop" /v "WallPaper" /t reg_sz /d "%SystemDrive%\\Programs\\background.jpg" /f 2>nul
+RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters
 
 
 
