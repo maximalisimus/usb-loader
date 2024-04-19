@@ -1,0 +1,11 @@
+﻿
+WinPE-Dot3Svc.cab
+
+
+net start dot3svc
+
+netsh lan add profile="G:\EthernetLANProfile.xml"
+
+netsh lan set eapuserdata filename="g:\EAP_UserData.xml" alluser=yes Interface="ethernet"
+
+
