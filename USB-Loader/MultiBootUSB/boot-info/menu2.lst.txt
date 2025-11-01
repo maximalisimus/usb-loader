@@ -1,0 +1,70 @@
+﻿timeout 30
+gfxmenu /boot/Moonlight
+default 0
+
+title Загрузка с жёсткого диска
+find --set-root --ignore-floppies --ignore-cd /bootmgr || find --set-root --ignore-floppies --ignore-cd /ntldr
+map (hd0) (hd1)
+map (hd1) (hd0)
+map --hook
+rootnoverify (hd0)
+chainloader (hd0)+1
+
+title Alkid Live CD
+find --set-root /minint/setupldr.bin
+chainloader /minint/setupldr.bin
+
+title Alkid Live CD (without SCSI/RAID)
+find --set-root /minint/setuplns.bin
+chainloader /minint/setuplns.bin
+
+title Windows 8 x86-64
+map --unmap=0:0xff
+map --unhook
+root (hd0,0)
+chainloader /bootmgr
+
+title HDD Regenerator (/img/hddreg.gz)
+root (hd0,0)
+map --mem /IMG/HDDREG.GZ (0xff)
+map --hook
+chainloader (0xff)
+
+title Load PLoP USB Driver
+root (hd0,0)
+kernel /plop/plpbt.bin
+
+title MemTest86+ (/img/memtest.bin)
+root (hd0,0)
+kernel /IMG/MEMTEST.BIN
+
+title Загрузка Symantec Ghost v11.0 - Работа с разделами жёстких дисков
+find --set-root /boot/Ghost.IMA
+map --mem /boot/Ghost.IMA (fd0) 
+map --hook
+rootnoverify (fd0)
+chainloader (fd0)+1
+ 
+title Загрузка Plop Boot Manager
+ls /usbdrive.tag || find --set-root --ignore-cd /usbdrive.tag
+kernel /plpbt.bin
+
+title Дополнительные утилиты >>>
+configfile /boot/menu_u.lst
+
+title
+root
+
+title Командная строка
+commandline
+
+title Загрузка c CD/DVD-ROM
+cdrom --init
+map --hook
+chainloader (cd0)
+
+title Перезагрузка компьютера
+reboot
+
+title Выключение компьютера
+halt

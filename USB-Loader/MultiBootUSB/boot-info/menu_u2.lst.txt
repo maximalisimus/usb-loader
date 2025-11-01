@@ -1,0 +1,91 @@
+﻿timeout 30
+gfxmenu /boot/Rainbow
+default 0
+
+title <<< Возврат в "Главное меню" 
+configfile /menu.lst
+
+title Загрузка FreeDOS - Загрузка в режиме командной строки, включает DOS-Navigator и VC  
+find --set-root /boot/FreeDOS.IMA
+map --mem /boot/FreeDOS.IMA (fd0) 
+map --hook
+rootnoverify (fd0)
+chainloader (fd0)+1
+
+title Загрузка Универсального загрузочного диска v3.7 - Доступ к разделам NTFS в режиме DOS
+find --set-root /boot/UniversalDisk.IMA
+map --mem /boot/UniversalDisk.IMA (fd0) 
+map --hook
+rootnoverify (fd0)
+chainloader (fd0)+1
+
+;title Загрузка Elcomsoft System Recovery Pro v3.0 Build 466 - Восстановление и смена пароля
+;find --set-root /boot/Elcomsoft.ISO
+;map --mem /boot/Elcomsoft.ISO (hd32)
+;map --hook
+;chainloader (hd32)
+
+title Загрузка NT Password & Registry Editor - Смена пароля и редактирование реестра
+find --set-root /boot/NtPasRec.IMA 
+map --mem /boot/NtPasRec.IMA (fd0) 
+map --hook
+rootnoverify (fd0)
+chainloader (fd0)+1
+
+title Загрузка Active@ Boot Disk Professional v2.1 - Восстановление удалённых файлов
+find --set-root /boot/ActiveCD.WBT
+map --mem /boot/ActiveCD.WBT (fd0) 
+map --hook
+rootnoverify (fd0)
+chainloader (fd0)+1
+
+title Загрузка QuickTech Pro v5.8 - Тестирование и диагностика компонентов компьютера   
+find --set-root /grldr 
+kernel /boot/memdisk 
+initrd /boot/Qtpro580.IMG
+
+title Загрузка MemTest86+ v4.20 - Тестирование и диагностика оперативной памяти 
+find --set-root /boot/MemTest.IMG
+map --mem /boot/MemTest.IMG (fd0) 
+map --hook
+rootnoverify (fd0)
+chainloader (fd0)+1
+
+title Загрузка MHDD v4.6 - Тестирование и диагностика жёстких дисков 
+find --set-root /boot/MHDD.IMA
+map --mem /boot/MHDD.IMA (fd0) 
+map --hook
+rootnoverify (fd0)
+chainloader (fd0)+1
+
+title Загрузка Victoria v3.52 - Тестирование и сервисное обслуживание IDE и ATA HDD  
+find --set-root /boot/Victoria.IMA
+map --mem /boot/Victoria.IMA (fd0) 
+map --hook
+rootnoverify (fd0)
+chainloader (fd0)+1
+
+title Загрузка HDD Regenerator v2011 - Устранение повреждений (битых секторов) на HDD
+find --set-root /boot/HDDReg.IMG
+map --mem /boot/HDDReg.IMG (fd0) 
+map --hook
+rootnoverify (fd0)
+chainloader (fd0)+1
+
+title
+root
+
+title Командная строка
+commandline
+
+title Загрузка c CD/DVD-ROM
+cdrom --init
+map --hook
+chainloader (cd0)
+
+title Перезагрузка компьютера
+reboot
+
+title Выключение компьютера
+halt
+

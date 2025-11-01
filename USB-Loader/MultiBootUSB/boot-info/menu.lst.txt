@@ -1,0 +1,106 @@
+﻿timeout 30
+gfxmenu /boot/Moonlight
+default 0
+
+title Load HDD
+find --set-root --ignore-floppies --ignore-cd /bootmgr || find --set-root --ignore-floppies --ignore-cd /ntldr
+map (hd0) (hd1)
+map (hd1) (hd0)
+map --hook
+rootnoverify (hd0)
+chainloader (hd0)+1
+
+title SYSLINUX 
+find --set-root --ignore-floppies /boot/syslinux/ldlinux.sys
+chainloader +1
+
+title Windows 8 x86-64
+map --unmap=0:0xff
+map --unhook
+root (hd0,0)
+chainloader /bootmgr
+
+title Windows 7 PE Compact
+find --set-root /WIN7PE/BOOTMGR    
+chainloader /WIN7PE/BOOTMGR
+
+title Alkid Live CD
+find --set-root /minint/setupldr.bin
+chainloader /minint/setupldr.bin
+
+title Alkid Live CD (without SCSI/RAID)
+find --set-root /minint/setuplns.bin
+chainloader /minint/setuplns.bin
+
+title Kon-Boot V2.1
+map --mem /boot/konboot.img (fd0)
+map --hook
+chainloader (fd0)+1
+map (hd1) (hd0)
+map --hook
+rootnoverify (fd0)
+
+title Kon-Boot V2.1 ISO
+find --set-root /boot/kon-bootCD.iso
+map --mem /boot/kon-bootCD.iso (hd32)
+map --hook
+chainloader (hd32)
+
+title Kon-Boot v2.1 OLD
+map --mem /boot/konbootOLD.img (fd0)
+map --hook
+chainloader (fd0)+1
+map (hd1) (hd0)
+map --hook
+rootnoverify (fd0)
+
+title Kon-Boot v2.1 ISO OLD
+find --set-root /boot/kon-bootCD_old.iso
+map --mem /boot/kon-bootCD_old.iso (hd32)
+map --hook
+chainloader (hd32)
+
+title HDD Regenerator (/img/hddreg.gz)
+root (hd0,0)
+map --mem /IMG/HDDREG.GZ (0xff)
+map --hook
+chainloader (0xff)
+
+title Load PLoP USB Driver
+root (hd0,0)
+kernel /plop/plpbt.bin
+
+title MemTest86+ (/img/memtest.bin)
+root (hd0,0)
+kernel /IMG/MEMTEST.BIN
+
+title Symantec Ghost v11.0
+find --set-root /boot/Ghost.IMA
+map --mem /boot/Ghost.IMA (fd0) 
+map --hook
+rootnoverify (fd0)
+chainloader (fd0)+1
+ 
+title Plop Boot Manager
+ls /usbdrive.tag || find --set-root --ignore-cd /usbdrive.tag
+kernel /plpbt.bin
+
+title Else Utilites >>>
+configfile /boot/menu_u.lst
+
+title
+root
+
+title CMD
+commandline
+
+title Load CD/DVD-ROM
+cdrom --init
+map --hook
+chainloader (cd0)
+
+title Restart PC
+reboot
+
+title Shutdown PC
+halt
