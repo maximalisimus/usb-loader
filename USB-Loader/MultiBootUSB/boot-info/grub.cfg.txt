@@ -1,0 +1,111 @@
+insmod part_gpt
+insmod part_msdos
+insmod efi_gop
+insmod efi_uga
+insmod gfxterm
+insmod loopback
+insmod all_video
+insmod gzio
+insmod ext2
+insmod fat
+insmod iso9660
+insmod ntfs
+
+loadfont "${prefix}/fonts/unicode.pf2"
+
+GRUB_GFXMODE=1024x768
+
+color_normal=black/black
+menu_color_normal=white/cyan
+menu_color_highlight=yellow/light-magenta
+background_color gray
+
+set timeout=60
+set default=0
+set pager=1
+--------------------------------------------------------------------------------------------------
+menuentry 'boot from hd1' {
+set root=hd1
+chainloader +1
+}
+--------------------------------------------------------------------------------------------------
+menuentry "Win7 RU SP1 x86-x64 efi 64" {
+  search --file --no-floppy --set=root /efi/Microsoft/Boot/bootx64.efi
+  chainloader /efi/Microsoft/Boot/bootx64.efi
+}
+--------------------------------------------------------------------------------------------------
+menuentry "Win7 RU SP1 x86-x64 cdboot" {
+  search --file --no-floppy --set=root /efi/Microsoft/Boot/cdboot.efi
+  chainloader /efi/Microsoft/Boot/cdboot.efi
+}
+--------------------------------------------------------------------------------------------------
+menuentry "Win7 RU SP1 x86-x64 cdboot noprompt" {
+  search --file --no-floppy --set=root /efi/Microsoft/Boot/cdboot_noprompt.efi
+  chainloader /efi/Microsoft/Boot/cdboot_noprompt.efi
+}
+--------------------------------------------------------------------------------------------------
+menuentry "Memtest" {
+  search --file --no-floppy --set=root /efi/Microsoft/Boot/memtest.efi
+  chainloader /efi/Microsoft/Boot/memtest.efi
+}
+--------------------------------------------------------------------------------------------------
+menuentry "KonBootDxeIA32" {
+  search --file --no-floppy --set=root /efi/Boot/KonBootDxeIA32.efi
+  chainloader /efi/Boot/KonBootDxeIA32.efi
+}
+--------------------------------------------------------------------------------------------------
+menuentry "KonBootDxeX64" {
+  search --file --no-floppy --set=root /efi/Boot/KonBootDxeX64.efi
+  chainloader /efi/Boot/KonBootDxeX64.efi
+}
+--------------------------------------------------------------------------------------------------
+menuentry «7. Windows»{
+linux /grub.exe --config-file=/boot/win.lst
+}
+submenu «8. Tools»{
+menuentry «1. Memtest» {
+set isofile="/iso/memtest.iso"
+linux16 /boot/memdisk iso
+initrd16 $isofile
+}
+menuentry «2. Plop Boot Manager» {
+linux16 /boot/plpbt.bin
+}
+menuentry "Boot IMG - Seagate Tools" {
+linux16 /memdisk bigraw
+initrd16 /SeaTools.img
+}
+}
+--------------------------------------------------------------------------------------------------
+configfile /EFI/boot/grub.cfg
+--------------------------------------------------------------------------------------------------
+menuentry "" {
+ echo " "
+}
+--------------------------------------------------------------------------------------------------
+menuentry "(F1) Info Disk System and Video" --hotkey="f1" {
+ echo "                  maximalisimus121@mail.ru          "
+ echo ""
+ echo "[---------------- Info disk system ----------------]"
+ ls -l
+ echo "[---------------- Info video system  ----------------]"
+ videoinfo
+ echo ""
+ echo "Press ESC for Main Menu..."
+ sleep --interruptible 9999
+}
+--------------------------------------------------------------------------------------------------
+menuentry "" {
+ echo " "
+}
+--------------------------------------------------------------------------------------------------
+menuentry "(r) Reboot" --hotkey="r" {
+ reboot
+}
+--------------------------------------------------------------------------------------------------
+menuentry "(h) Shutdown" --hotkey="r" {
+ halt
+}
+--------------------------------------------------------------------------------------------------
+
+
